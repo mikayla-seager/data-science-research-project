@@ -1,7 +1,7 @@
-# Loading in packages ----------------------------------------------------------
+# Loading in packages --------------------------------------------------------------------------------------------------------------------------------
 pacman::p_load(tidyverse, readr, skimr, stats, forecast, patchwork, janitor, lubridate)
 
-# Manoeuvre data import and clean ----------------------------------------------
+# Manoeuvre data import and clean --------------------------------------------------------------------------------------------------------------------
 # Setting directory
 setwd("V:\\Mikayla Seager\\2024\\DSRP\\satellite_data\\manoeuvres")
 
@@ -140,7 +140,7 @@ tpx_man <- manoeuvre_clean(tpx_man_raw)
 
 
 
-# Satellite elements data import and clean -------------------------------------
+# Satellite elements data import and clean -----------------------------------------------------------------------------------------------------------
 # Setting directory again
 setwd("V:\\Mikayla Seager\\2024\\DSRP\\satellite_data\\orbital_elements")
 
@@ -220,7 +220,7 @@ tpx <- remove_outliers(tpx_raw)
 
 
 
-# Plotting and EDA -------------------------------------------------------------
+# Plotting and EDA -----------------------------------------------------------------------------------------------------------------------------------
 # Function to visualise orbital elements
 six_plots <- function(dataset) {
   p1 <- dataset %>% ggplot(aes(x=Date, y=inclination)) + 
@@ -327,7 +327,7 @@ stl3b_man %>% filter(man_beg >= as.Date("2019-01-01") & man_beg <= as.Date("2022
 
 
 
-# Functions for ARIMA modelling ------------------------------------------------
+# Functions for ARIMA modelling ----------------------------------------------------------------------------------------------------------------------
 # Creating a vector of element names
 element_names <- c("eccentricity", "argument_of_perigee", "inclination", "mean_anomaly", "brouwer_mean_motion", "right_ascension")
 # Function to get all combinations of elements
@@ -509,7 +509,7 @@ arima_six_plots <- function(dataset, dataset_man, date_start, date_end, date_spl
 
 
 
-# Results and final plots ------------------------------------------------------
+# Results and final plots ----------------------------------------------------------------------------------------------------------------------------
 # Getting best ARIMA models for all elements of CryoSat-2
 cs2_incl_best <- best_arima_model(cs2, cs2_man, "2016-01-01", "2020-01-01", "2019-02-11", "inclination", "reg")
 cs2_ecce_best <- best_arima_model(cs2, cs2_man, "2016-01-01", "2020-01-01", "2019-02-11", "eccentricity", "reg")
