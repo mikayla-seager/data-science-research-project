@@ -3,7 +3,7 @@ pacman::p_load(tidyverse, readr, skimr, stats, forecast, patchwork, janitor, lub
 
 # Manoeuvre data import and clean ----------------------------------------------
 # Setting directory
-setwd("V:\\Michael Seager\\St. Michael's\\2024\\DSRP\\satellite_data\\manoeuvres")
+setwd("V:\\Mikayla Seager\\2024\\DSRP\\satellite_data\\manoeuvres")
 
 # Reading in all manoeuvre data
 cs2_man_raw <- readLines("cs2man.txt") %>% str_replace_all('     ', " NA ")
@@ -27,8 +27,8 @@ manoeuvre_clean_fy <- function(dataset) {
   
   # Extracting manoeuvre timestamps to a tibble
   output_data <- tibble(
-    man_beg = ymd_hms(str_extract(fy2d_man_raw, '(?<=\\")[^"]*(?=\\")')),
-    man_end = ymd_hms(str_extract(fy2d_man_raw, '(?<=\")[^"]*(?=\\"(?!.*\\"))'))
+    man_beg = ymd_hms(str_extract(dataset, '(?<=\\")[^"]*(?=\\")')),
+    man_end = ymd_hms(str_extract(dataset, '(?<=\")[^"]*(?=\\"(?!.*\\"))'))
   )
   
   # Returning the tibble of manoeuvre timestamps
@@ -142,7 +142,7 @@ tpx_man <- manoeuvre_clean(tpx_man_raw)
 
 # Satellite elements data import and clean -------------------------------------
 # Setting directory again
-setwd("V:\\Michael Seager\\St. Michael's\\2024\\DSRP\\satellite_data\\orbital_elements")
+setwd("V:\\Mikayla Seager\\2024\\DSRP\\satellite_data\\orbital_elements")
 
 # Reading in all satellite data
 cs2_raw <- read_csv("unpropagated_elements_CryoSat-2.csv") %>% clean_names() %>% rename(Date = x1)
